@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <template id="report_transaksi_pdf">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <h2>
+                        <center><b> Laporan Transaksi </b></center>
+                    <hr></hr>
+                    </h2>
+                    <t t-foreach="docs" t-as="d">
+                        <div class="row">
+                            <div class="col-2">Nama Kasir   :</div>
+                            <div class="col-10"><span t-field="d.name"/></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">Tanggal Penjualan :</div>
+                            <div class="col-10"><span t-field="d.date_time"/></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">Total Pembayaran  :</div>
+                            <div class="col-10"><span t-field="d.total_pembayaran"/></div>
+                        </div>
+                        <br/>
+                        <div style="text-align:center;"><b> Daftar Items </b></div>
+                        <style>
+                            table.center {
+                                            margin-left: auto; 
+                                            margin-right: auto;
+                                        }
+                        </style>
+                        <table class="center" style="width:50%;">
+                            <tr>
+                                <th>Nama Barang</th>
+                                <th>Quantity</th>
+                                <th>Harga Satuan</th>
+                                <th>Subtotal</th>
+                            </tr>
+                            <t t-foreach="d.transaksi_ids" t-as="ds">
+                                <tr>
+                                    <td><span t-field="ds.product_id.name"/></td>
+                                    <td><span t-field="ds.qty"/></td>
+                                    <td><span t-field="ds.harga_satuan"/></td>
+                                    <td><span t-field="ds.total_harga"/></td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td>-</td>
+                                <td>-</td>
+                                <td><b>Total :</b></td>
+                                <td><span t-field="d.total_pemabayaran"/></td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <hr></hr>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>
+
+

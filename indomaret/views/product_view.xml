@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <!-- indomaret.barang form view -->
+    <record id="indomaret_barang_view_form" model="ir.ui.view">
+        <field name="name">indomaret.barang.view.form</field>
+        <field name="model">indomaret.barang</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="stock"/>
+                        <field name="price"/> 
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- indomaret.barang tree view -->
+    <record id="indomaret_barang_view_tree" model="ir.ui.view">
+        <field name="name">indomaret.barang.view.tree</field>
+        <field name="model">indomaret.barang</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="name"/>
+                <field name="stock"/>
+                <field name="price"/> 
+            </tree>
+        </field>
+    </record>
+
+    
+    <!-- indomaret.barang action window -->
+    <record id="indomaret_barang_action" model="ir.actions.act_window">
+        <field name="name">barang</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">indomaret.barang</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="indomaret_barang_menu_act"
+            name="barang" 
+            parent="indomaret_barang_menu_categ" 
+            action="indomaret_barang_action" 
+            sequence="10"/>
+</odoo>

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    
+
+    <!-- res.partner inherit tree view -->
+    <record id="res_partner_inherit_view_tree_id" model="ir.ui.view">
+        <field name="name">res.partner.inherit.view.tree</field>
+        <field name="model">res.partner</field>
+        <field name="mode">extension</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="poin" invisible='1'/>
+            </xpath> 
+        </field>
+    </record>
+
+
+    
+
+    <!-- res.partner inherit form view -->
+    <record id="res_partner_inherit_view_form_id" model="ir.ui.view">
+        <field name="name">res.partner.inherit.view.form</field>
+        <field name="model">res.partner</field>
+        <field name="mode">extension</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+             <xpath expr="//field[@name='vat']" position="after">
+                <field name="poin" invisible='1'/>
+            </xpath> 
+        </field>
+    </record>
+
+    <!-- res.partner action window -->
+    <record id="res_partner_action" model="ir.actions.act_window">
+        <field name="name">Karyawan</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="res_partner_menu_act" 
+              name="Karyawan" 
+              parent="indomaret_menu_root" 
+              action="res_partner_action" 
+              sequence="20"/>
+</odoo>

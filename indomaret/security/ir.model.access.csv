@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_indomaret_barang,access.indomaret.barang,model_indomaret_barang,,1,1,1,1
+access_indomaret_transaksi,access.indomaret.transaksi,model_indomaret_transaksi,,1,1,1,1
+access_indomaret_detailtransaksi,access.indomaret.detailtransaksi,model_indomaret_detailtransaksi,,1,1,1,1
+

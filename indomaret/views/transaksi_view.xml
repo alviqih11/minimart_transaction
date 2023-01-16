@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+
+   
+    <!-- indomaret.transaksi tree view -->
+    <record id="indomaret_transaksi_view_tree" model="ir.ui.view">
+        <field name="name">indomaret.transaksi.view.tree</field>
+        <field name="model">indomaret.transaksi</field>
+        <field name="arch" type="xml">
+            <tree>
+               <field name="name"/>
+               <field name="date_time"/>
+               <field name="transaksi_ids"/> 
+               <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+     <!-- indomaret.transaksi form view -->
+    <record id="indomaret_transaksi_view_form" model="ir.ui.view">
+        <field name="name">indomaret.transaksi.view.form</field>
+        <field name="model">indomaret.transaksi</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <button name="action_draft" type="object" string="Draft" class="btn btn-primary" states="cancelled" />
+                    <button name="action_confirm" type="object" string="Confirm" class="btn btn-warning" states="draft" />
+                    <button name="action_done" type="object" string="Done" class="btn btn-success" states="confirm" />
+                    <button name="action_cancelled" type="object" string="Cancelled" class="btn btn-danger" states="confirm" confirm="Apakah anda yakin Ingin Melakukan Cancel?" />
+
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        <field name="date_time" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        <field name="uang_masuk" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        <field name="uang_kembalian" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        <field name="transaksi_ids" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                            <tree editable="bottom">
+                                <field name="name" invisible='1'/>
+                                <field name="product_id"/>
+                                <field name="harga_satuan" />
+                                <field name="qty"/>
+                                <field name="total_harga"/>
+                            </tree>
+                        </field>
+                        <field name="total_pembayaran"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- indomaret.transaksi action window -->
+    <record id="indomaret_transaksi_action" model="ir.actions.act_window">
+        <field name="name">Transaksi</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">indomaret.transaksi</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="indomaret_transaksi_menu_act"
+              name="Transaksi" 
+              parent="indomaret_transaksi_menu_categ" 
+              action="indomaret_transaksi_action" 
+              sequence="10"/>
+</odoo>
