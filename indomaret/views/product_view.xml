@@ -8,10 +8,12 @@
         <field name="arch" type="xml">
             <form string="">
                 <sheet>
+                    <field name="image_barang" widget="image" class="oe_avatar"/>
                     <group>
                         <field name="name"/>
                         <field name="stock"/>
                         <field name="price"/> 
+                        <field name="kategori"/>
                     </group>
                 </sheet>
             </form>
@@ -32,6 +34,27 @@
         </field>
     </record>
 
+    <!-- indomaret barang kanban view -->
+    <record id="indomaret_barang_view_kanban" model="ir.ui.view">
+        <field name="name">indomaret.barang.view.kanban</field>
+        <field name="model">indomaret.barang</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                    <field name="name"/>
+                    <field name="stock"/>
+                    <field name="price"/>  
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="o_kanban_record_top mb16">
+                                    <strong><span> <t t-esc="record.name.value"/> </span></strong>
+                                </div>
+                            </div>   
+                        </t>
+                    </templates>
+            </kanban>
+        </field>
+    </record>
     
     <!-- indomaret.barang action window -->
     <record id="indomaret_barang_action" model="ir.actions.act_window">
@@ -41,10 +64,11 @@
         <field name="view_mode">tree,form,kanban</field>
     </record>
 
+
     <!-- This Menu Item must have a parent and an action -->
     <menuitem id="indomaret_barang_menu_act"
             name="barang" 
-            parent="indomaret_barang_menu_categ" 
+            parent="indomaret_menu_root" 
             action="indomaret_barang_action" 
             sequence="10"/>
 </odoo>

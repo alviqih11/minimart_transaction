@@ -4,7 +4,7 @@
     <menuitem id="indomaret_menu_root" name="Indomaret" sequence="10"/>
 
     <!-- This Menu Item Must have a parent -->
-    <menuitem id="indomaret_barang_menu_categ" name="Barang" parent="indomaret_menu_root" sequence="10"/>
+    <!-- <menuitem id="indomaret_barang_menu_categ" name="Barang" parent="indomaret_menu_root" sequence="10"/> -->
 
    <!-- This Menu Item Must have a parent -->
    <menuitem id="indomaret_transaksi_menu_categ" name="Transaksi" parent="indomaret_menu_root" sequence="40"/>

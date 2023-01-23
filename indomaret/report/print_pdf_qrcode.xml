@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <template id="print_qr_code">
+        <t t-call="web.html_container">
+        <t t-call="web.internal_layout">
+           <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="row">
+                        <p style="font-size: 8px; font-weight: bold; padding-top: 8px; padding-bottom:4px; padding-left:5px; padding-right:4px;">
+                            <!-- QR, EAN13,EAN8, UPCA, Code128 -->
+                            <img t-if="o.barang_qrcode" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('EAN8',o.barang_qrcode,200,200)" style="width:102px; height:102px; float:left" />
+                            <!-- <img t-att-src="'report/barcode/QR/%s'%(o.barang_qrcode)" width="80" height="80" /> -->
+                        </p>
+                    </div>
+                </div>
+           </t>
+        </t>
+        </t>
+    </template>
+</odoo>

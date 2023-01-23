@@ -33,6 +33,7 @@
         'views/transaksi_view.xml',
         'report/report.xml',
         'report/print_pdf.xml',
+        'report/print_pdf_qrcode.xml',
     ],
     
     'demo': [

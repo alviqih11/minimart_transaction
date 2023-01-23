@@ -36,12 +36,12 @@
         <field name="name">Karyawan</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.partner</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,kanban</field>
     </record>
 
     <!-- This Menu Item must have a parent and an action -->
     <menuitem id="res_partner_menu_act" 
-              name="Karyawan" 
+              name="Karyawan"  
               parent="indomaret_menu_root" 
               action="res_partner_action" 
               sequence="20"/>

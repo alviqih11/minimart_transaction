@@ -21,7 +21,17 @@ class indomaretproduct(models.Model):
     price = fields.Float(string='Harga Produk')
     products_ids = fields.One2many(comodel_name='indomaret.detailtransaksi', inverse_name='product_id', string='Produk')
     target_date = fields.Datetime(string='Tanggal Masuk')
+    image_barang = fields.Image(string='Add Photo')
+    kategori = fields.Selection(string='', selection=[('minuman', 'Minuman'), ('makananberat', 'Makanan Berat'),('makananringan', 'Makanan Ringan')])
+    barang_qrcode = fields.Char(string='Barang Qr Code', compute='get_barang_qr_code')
 
+    def get_barang_qr_code(self):
+        for rec in self:
+            rec.barang_qrcode = str(rec.id)
+            
+    
+    
+    
    
   
     

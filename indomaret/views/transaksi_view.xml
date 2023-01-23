@@ -65,7 +65,7 @@
     <!-- This Menu Item must have a parent and an action -->
     <menuitem id="indomaret_transaksi_menu_act"
               name="Transaksi" 
-              parent="indomaret_transaksi_menu_categ" 
+              parent="indomaret_menu_root" 
               action="indomaret_transaksi_action" 
               sequence="10"/>
 </odoo>

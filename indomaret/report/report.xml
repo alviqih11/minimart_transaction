@@ -14,9 +14,19 @@
         <field name="name">Print Pdf</field>
         <field name="model">indomaret.transaksi</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">indomaret.report_transaksi_pdf</field>
-        <field name="report_file">indomaret.report_transaksi_pdf</field>
+        <field name="report_name">indomaret.print_report_transaksi_pdf</field>
+        <field name="report_file">indomaret.print_report_transaksi_pdf</field>
         <field name="binding_model_id" ref="model_indomaret_transaksi"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="print_qr_code_pdf" model="ir.actions.report">
+        <field name="name">Print Qr Code</field>
+        <field name="model">indomaret.barang</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">indomaret.print_qr_code</field>
+        <field name="report_file">indomaret.print_qr_code</field>
+        <field name="binding_model_id" ref="model_indomaret_barang"/>
         <field name="binding_type">report</field>
     </record>
 

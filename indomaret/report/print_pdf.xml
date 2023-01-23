@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
 
-    <template id="report_transaksi_pdf">
+    <template id="print_report_transaksi_pdf">
         <t t-call="web.html_container">
             <t t-call="web.internal_layout">
                 <div class="page">
@@ -23,13 +23,8 @@
                             <div class="col-10"><span t-field="d.total_pembayaran"/></div>
                         </div>
                         <br/>
-                        <div style="text-align:center;"><b> Daftar Items </b></div>
-                        <style>
-                            table.center {
-                                            margin-left: auto; 
-                                            margin-right: auto;
-                                        }
-                        </style>
+                        <div><b> Daftar Items </b></div>
+                        
                         <table class="center" style="width:50%;">
                             <tr>
                                 <th>Nama Barang</th>
@@ -45,12 +40,6 @@
                                     <td><span t-field="ds.total_harga"/></td>
                                 </tr>
                             </t>
-                            <tr>
-                                <td>-</td>
-                                <td>-</td>
-                                <td><b>Total :</b></td>
-                                <td><span t-field="d.total_pemabayaran"/></td>
-                            </tr>
                         </table>
                         <br/>
                         <hr></hr>
