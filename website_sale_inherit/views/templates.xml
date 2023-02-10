@@ -1,0 +1,19 @@
+<odoo>
+  <data>
+
+    <template id="template_sort_inherit" inherit_id="website_sale.sort" name="Show Sort by">
+      <xpath expr="//t[@t-set='website_sale_sortable']" position="after">
+        <t t-set="promo_label">Promo</t>
+        <t t-set="website_sale_sortable" t-value="[
+                    (list_price_desc_label, 'list_price desc'),
+                    (list_price_asc_label, 'list_price asc'),
+                    (name_asc_label, 'name asc'),
+                    (name_desc_label, 'name desc'),
+                    (promo_label, 'promo')
+                ]"/>
+      </xpath>
+    </template>
+    
+
+  </data>
+</odoo>
