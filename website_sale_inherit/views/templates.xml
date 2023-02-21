@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <odoo>
   <data>
 
@@ -13,7 +14,119 @@
                 ]"/>
       </xpath>
     </template>
-    
+
+    <template id="products_item_inherit" inherit_id="website_sale.products_item">
+      <xpath expr="//h6[@class='o_wsale_products_item_title']" position="after">
+        <h1 itemprop="promo" t-if="product.promo == '10'" t-att-content="product.promo" t-field="product.promo" class="btn btn-danger position-absolute"/> 
+        <h1 itemprop="promo" t-if="product.promo == '15'" t-att-content="product.promo" t-field="product.promo" class="btn btn-danger position-absolute"/>
+        <h1 itemprop="promo" t-if="product.promo == '25'" t-att-content="product.promo" t-field="product.promo" class="btn btn-danger position-absolute"/>
+      </xpath>
+    </template>
+
+    <!-- crete produk -->
+    <template id="create_produk">
+      <t t-call="website.layout">
+        <div id="wrap">
+          <div class="oe_structure">
+            <div class="container">
+              <form role="form" action="/shop/webproduk" method="POST">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                <div class="form_group mt-2">
+                  <label for="name" class="control-label">Product Name</label>
+                  <input type="text" name="name" t-att-value="name" id="name" class="form-control" placeholder="Jeruk Bali" required="required"/>
+                </div>
+
+                <div class="form_group mt-2">
+                  <label for="list_price" class="control-label">Sales Price</label>
+                  <input type="text" name="list_price" t-att-value="list_price" id="list_price" class="form-control" placeholder="10000" required="required"/>
+                </div>
+
+                <div class="clearfix oe_login_buttons mt-2">
+                  <button type="submit" class="btn btn-primary pull-left">Create</button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </t>
+    </template>
+
+    <!-- tampilan thanks apabila user sudah membuat product baru -->
+    <record id="thanks" model="website.page">
+      <field name="name">Thanks</field>
+      <field name="type">qweb</field>
+      <field name="url">/thanks</field>
+      <field name="website_published">True</field>
+      <field name="key">website_sale_inherit.thanks</field>
+      <field name="arch" type="xml">
+        <t name="Thanks" t-name="website_sale_inherit.thanks">
+          <t t-call="website.layout">
+            <div id="wrap">
+              <div class="container">
+                <h1>Thanks Fadil!</h1>
+                <div class="row">
+                  <div class="col-lg-8">
+                    <div class="alert alert-success" role="status">
+                      Your message has been sent sucesfully.
+                    </div>
+                    <p>
+                      We will get back to you shortly.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </t>
+        </t>
+      </field>
+    </record>
+
+    <!-- acces denied apabila yang login user yang bertipe portal -->
+    <odoo>
+      <data>
+        <template id="access_denied">
+          <t t-call="website.layout">
+            <div class="container mt-5">
+              <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Access Denied</h4>
+                <hr/>
+                <p>Sorry, you do not have access to this page.</p>
+              </div>
+            </div>
+          </t>
+        </template>
+      </data>
+    </odoo>
+
+
+    <!-- overide xml apa bila ada promo maka harga nya akan di coret -->
+    <template id="products_item_overide_price" inherit_id="website_sale.products_item">
+      <xpath expr="//div[contains(@class,'product_price')]" position="replace">
+        <div class="product_price" itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer">
+          <t t-if="combination_info['price']">
+            <t t-if="product.promo">
+              <del>
+                <t t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+              </del>
+              <h1 itemprop="after_disc" t-att-content="product.after_disc" t-field="product.after_disc"/>
+            </t>
+            <t t-else="">
+              <t t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+            </t>
+          </t>
+          <span itemprop="price" style="display:none;" t-esc="combination_info['price']" />
+          <span itemprop="priceCurrency" style="display:none;" t-esc="website.currency_id.name" />
+        </div>
+      </xpath>
+    </template>
+
+
+
+
+
+
 
   </data>
 </odoo>

@@ -1,5 +1,6 @@
 from odoo import http
 from odoo.addons.website_sale.controllers.main import WebsiteSale
+from odoo.http import request
 
 
 class WebsiteSaleInherit(WebsiteSale):
@@ -30,4 +31,27 @@ class WebsiteSaleInherit(WebsiteSale):
         res = super(WebsiteSaleInherit, self).shop(page=0, category=None, search='', ppg=False, **post)
         print("hasil inherit")
         return res
+
+    # @http.route('/shop/crate_produk', type="http", auth='user', website="True")
+    # def create_produk(self, **kw):
+    #     product = request.env['product.template'].search([])
+    #     return http.request.render('website_sale_inherit.create_produk',  {
+    #          'produk' : product
+    #     })
+
+    @http.route('/shop/crate_produk', type="http", auth='user', website="True")
+    def create_produk(self, **kw):
+        user = request.env.user
+        if user.has_group('base.group_portal'):
+            return request.render('website_sale_inherit.access_denied')
+        else:
+            product = request.env['product.template'].search([])
+            return http.request.render('website_sale_inherit.create_produk', {
+                'produk': product
+            })
+
+    @http.route('/shop/webproduk', type="http", auth='user', website="True")
+    def create_webproduk(self, **kw): 
+        request.env['product.template'].sudo().create(kw)
+        return http.request.render('website_sale_inherit.thanks',  {})
         
